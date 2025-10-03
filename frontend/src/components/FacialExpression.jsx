@@ -44,7 +44,7 @@ export default function FacialExpression() {
     return (
         <div className='flex flex-col p-5'>
             <h1 className='text-xl font-semibold'>/Moody Player</h1>
-            <div className='flex flex-col gap-5 pt-10 md:px-20 md:py-10'>
+            <div className='flex flex-col gap-10 pt-10 md:px-20 md:py-10'>
                 <h1 className='text-3xl'>Live Mood Detection</h1>
                 <div className='grid grid-cols-1 md:grid-cols-2 w-full items-start gap-5'>
                     <div className='flex items-center justify-start gap-10 '>
