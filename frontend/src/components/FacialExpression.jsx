@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import * as faceapi from 'face-api.js';
-import MoodSongs from './Songs';
-export default function FacialExpression() {
+import axios from 'axios';
+
+export default function FacialExpression({ setSongs }) {
     const videoRef = useRef();
 
     const loadModels = async () => {
@@ -35,14 +36,20 @@ export default function FacialExpression() {
                 _expression = expression
             }
         }
-        console.log(_expression)
+        axios
+            .get(`http://localhost:3000/songs?mood=${_expression}`)
+            .then((response) => {
+                console.log(response.data)
+                setSongs(response.data.songs)
+            })
+            .catch((err) => console.error(err))
     }
     useEffect(() => {
 
         loadModels().then(startVideo);
     }, []);
     return (
-        <div className='flex flex-col p-5'>
+        <div className='flex flex-col'>
             <h1 className='text-xl font-semibold'>/Moody Player</h1>
             <div className='flex flex-col gap-10 pt-10 md:px-20 md:py-10'>
                 <h1 className='text-3xl'>Live Mood Detection</h1>
@@ -61,7 +68,6 @@ export default function FacialExpression() {
                         <button className='px-4 py-2 active:bg-[#1c1c1c] rounded-2xl bg-black/10 border border-gray-400 cursor-pointer' onClick={detectMood}>Detect Mood</button>
                     </div>
                 </div>
-                <MoodSongs />
             </div>
         </div>
     );

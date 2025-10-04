@@ -12,6 +12,7 @@ function uploadFile(file) {
       {
         file: file.buffer,
         fileName: file.originalname,
+        folder: "Moody-Player",
       },
       function (error, result) {
         if (error) {
